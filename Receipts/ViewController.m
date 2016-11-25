@@ -7,8 +7,15 @@
 //
 
 #import "ViewController.h"
+#import "ReceiptTableViewCell.h"
 
-@interface ViewController ()
+#import <CoreData/CoreData.h>
+
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSArray *tempArray;
 
 @end
 
@@ -16,7 +23,70 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    //TEST DATA
+    [self setupData];
+ 
+  
+//    // Initialize Fetch Request
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Item"];
+//    
+//    // Add Sort Descriptors
+//    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
+//    
+//    // Initialize Fetched Results Controller
+//    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+//    
+//    // Configure Fetched Results Controller
+//    [self.fetchedResultsController setDelegate:self];
+//    
+//    // Perform Fetch
+//    NSError *error = nil;
+//    [self.fetchedResultsController performFetch:&error];
+//    
+//    if (error) {
+//        NSLog(@"Unable to perform fetch.");
+//        NSLog(@"%@, %@", error, error.localizedDescription);
+//    }
+    
+    NSLog(@"The managed object context is: %@", self.managedObjectContext);
 }
+
+
+#pragma - table view delegate methods -
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSLog(@"Number of rows: %ld", self.tempArray.count);
+    return self.tempArray.count;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Family";
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ReceiptTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"receiptCell" forIndexPath:indexPath];
+    NSString *currentObject = self.tempArray[indexPath.row];
+    cell.receiptLabel.text = currentObject;
+    return cell;
+}
+
+
+#pragma - data setup (temp)
+
+-(void)setupData
+{
+    self.tempArray = @[@"one", @"two", @"three"];
+}
+
+
 
 @end

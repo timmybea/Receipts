@@ -21,7 +21,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jV7-Vb-bew">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="receiptCell" rowHeight="35" id="Izw-4h-e8e">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="receiptCell" rowHeight="35" id="Izw-4h-e8e" customClass="ReceiptTableViewCell">
                                         <rect key="frame" x="0.0" y="92" width="359" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Izw-4h-e8e" id="HfS-gD-6Ed">
@@ -41,8 +41,15 @@
                                                 <constraint firstAttribute="trailing" secondItem="RDp-NH-qkj" secondAttribute="trailing" id="hyK-6C-5KV"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="receiptLabel" destination="RDp-NH-qkj" id="xvm-Wb-Wdn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="d9G-23-YPS"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="EH3-Bx-VjB"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59L-UL-mqE">
                                 <color key="backgroundColor" red="0.1765605532" green="0.2210353612" blue="0.34328808449999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -68,6 +75,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1Bt-Ta-ikH"/>
+                    <connections>
+                        <outlet property="tableView" destination="jV7-Vb-bew" id="vUv-lf-Qbb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -182,7 +192,7 @@
         <!--Navigation Controller-->
         <scene sceneID="xiI-7Z-O8b">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gkI-te-qIY" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="rootNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="gkI-te-qIY" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0gT-fG-qQZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
