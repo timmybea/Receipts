@@ -8,10 +8,11 @@
 
 #import "ViewController.h"
 #import "ReceiptTableViewCell.h"
+#import "DetailViewController.h"
 
 #import <CoreData/CoreData.h>
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -28,15 +29,20 @@
     [self setupData];
  
   
-//    // Initialize Fetch Request
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Item"];
-//    
-//    // Add Sort Descriptors
-//    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
-//    
-//    // Initialize Fetched Results Controller
-//    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-//    
+    // Initialize Fetch Request
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Receipt"];
+    
+     //Add Sort Descriptors
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
+    
+    NSError *error = nil;
+    
+    NSAsynchronousFetchResult *result = [self.managedObjectContext executeRequest:fetchRequest error:&error];
+    
+    
+    // Initialize Fetched Results Controller
+//    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:nil sectionNameKeyPath:nil cacheName:nil];
+//
 //    // Configure Fetched Results Controller
 //    [self.fetchedResultsController setDelegate:self];
 //    
@@ -78,6 +84,20 @@
     cell.receiptLabel.text = currentObject;
     return cell;
 }
+
+
+#pragma - segue -
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.identifier isEqualToString:@"detailVCSegue"]) {
+//        // Obtain Reference to View Controller
+//        DetailViewController *vc = [segue destinationViewController];
+//        
+//        // Configure View Controller
+//        vc.managedObjectContext = self.managedObjectContext;
+//    }
+//}
+
 
 
 #pragma - data setup (temp)

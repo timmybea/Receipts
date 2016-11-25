@@ -11,6 +11,11 @@
 
 @interface DetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
+
+@property (weak, nonatomic) IBOutlet UITextField *amountTextField;
+@property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *categoriesArray;
 
@@ -24,6 +29,57 @@
     [self categorySetUp];
 }
 
+
+
+
+
+//- (IBAction)saveAction:(UIBarButtonItem *)sender
+//{
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    
+//    // Helpers
+//    NSString *name = self.titleTextField.text;
+//    
+//    if (name && name.length)
+//    {
+//        // Create Entity
+//        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.managedObjectContext];
+//        
+//        // Initialize Record
+//        NSManagedObject *record = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+//        
+//        // Populate Record
+//        [record setValue:name forKey:@"name"];
+//        [record setValue:[NSDate date] forKey:@"createdAt"];//**
+//        
+//        // Save Record
+//        NSError *error = nil;
+//        
+//        if ([self.managedObjectContext save:&error])
+//        {
+//            // Dismiss View Controller
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//            
+//        }
+//        else
+//        {
+//            if (error)
+//            {
+//                NSLog(@"Unable to save record.");
+//                NSLog(@"%@, %@", error, error.localizedDescription);
+//            }
+//        }
+//    }
+//}
+//
+//- (IBAction)cancelAction:(UIBarButtonItem *)sender
+//{
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
+
+
+
+#pragma - category table view set up -
 
 - (void)categorySetUp
 {

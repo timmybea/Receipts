@@ -23,22 +23,24 @@
 #pragma mark - Core Data stack
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    // Fetch Main Storyboard
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    
-    // Instantiate Root Navigation Controller
-    UINavigationController *rootNavigationController = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"rootNavigationController"];
+//    
+//    // Fetch Main Storyboard
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+//    
+//    // Instantiate Root Navigation Controller
+    UINavigationController *rootNavigationController = (UINavigationController *)self.window.rootViewController;
     
     // Configure View Controller
     ViewController *viewController = (ViewController *)[rootNavigationController topViewController];
     
     if ([viewController isKindOfClass:[ViewController class]]) {
+        
         [viewController setManagedObjectContext:self.managedObjectContext];
+        
     }
     
     // Configure Window
-    [self.window setRootViewController:rootNavigationController];
+    //[self.window setRootViewController:rootNavigationController];
     
     return YES;
 }
